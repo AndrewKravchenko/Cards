@@ -4,9 +4,9 @@ import { Link, Redirect } from 'react-router-dom';
 import s from './RecoveryPassForm.module.scss';
 import { InputText } from '../../../../common/ui/InputText';
 import { Button } from '../../../../common/ui/Button';
-import { LoginLinkType } from './RecoveryPassFormContainer';
 import { Preloader } from '../../../../common/ui/Preloader';
 import { ErrorMessage } from '../../../../common/ui/ErrorMessage';
+import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
 
 type PropsType = {
   loginLink: LoginLinkType;

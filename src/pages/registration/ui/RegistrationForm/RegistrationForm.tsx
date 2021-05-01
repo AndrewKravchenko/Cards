@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import s from './RegistrationForm.module.scss'
 import {InputText} from "../../../../common/ui/InputText";
 import {Button} from "../../../../common/ui/Button";
-import {LoginLinkType} from "./RegistrationFormContainer";
+import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
 
 
 type PropsType = {

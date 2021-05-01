@@ -14,6 +14,8 @@ import { registrationReducer as register } from '../../pages/registration/bll/re
 import { recoveryPassReducer as recoveryPass } from '../../pages/recoveryPass/bll/recoveryPassReducer';
 import { setPassReducer as setPass } from '../../pages/setPass/bll/setPassReducer';
 import { profileReducer as profile } from '../../pages/profile/bll/profileReducer';
+import { packsReducer as packs } from '../../pages/packs/bll/PacksReducer';
+import { cardsReducer as cards } from '../../pages/cards/bll/CardsReducer';
 
 const rootReducer = combineReducers({
   login,
@@ -21,6 +23,8 @@ const rootReducer = combineReducers({
   recoveryPass,
   setPass,
   profile,
+  packs,
+  cards
 });
 
 // @ts-ignore next line
@@ -36,18 +40,14 @@ export const store = createStore(rootReducer, enhancedStore);
 /** Types */
 export type RootStateType = ReturnType<typeof rootReducer>;
 
-export type InferActionsType<T> = T extends Record<
-  string,
-  (...args: never[]) => infer U
->
+export type InferActionsType<T> = T extends Record<string,
+    (...args: never[]) => infer U>
   ? U
   : never;
 
-export type ThunkType<
-  A extends Action = Action,
+export type ThunkType<A extends Action = Action,
   R = Promise<void>,
-  S = RootStateType
-> = ThunkAction<R, S, unknown, A>;
+  S = RootStateType> = ThunkAction<R, S, unknown, A>;
 
 if (DEV) {
   // @ts-ignore next line

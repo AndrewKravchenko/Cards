@@ -10,6 +10,7 @@ import { PATH } from '../../../../main/ui/App/Routes';
 import { RecoveryPassForm } from './RecoveryPassForm';
 import { sendEmailAsync } from '../../bll/recoveryPassThunk';
 import { recoveryPassActions } from '../../bll/recoveryPassActions';
+import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
 
 export const RecoveryPassFormContainer: FC = () => {
   const { LOGIN, SET_PASS } = PATH;
@@ -53,9 +54,4 @@ export const RecoveryPassFormContainer: FC = () => {
       redirectLink={SET_PASS}
     />
   );
-};
-
-export type LoginLinkType = {
-  link: string;
-  title: string;
 };

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { useEffect, useState } from 'react';
 
 type ValidationsType = {
@@ -25,12 +25,12 @@ const useValidation = (value: string, validations: ValidationsType) => {
         case 'isPassword':
           if (value.length === 0) {
             setInputError('Password is required');
-          } else value.length < (validations.minLength?validations.minLength:8)
+          } else value.length < (validations.minLength ? validations.minLength : 8)
             ? setInputError('Password must be 8 or more characters')
             : setInputError('');
       }
     }
-  }, [value]);
+  }, [value, validations]);
 
   useEffect(() => {
     if (inputError) {

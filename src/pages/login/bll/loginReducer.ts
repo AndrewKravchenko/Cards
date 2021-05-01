@@ -7,7 +7,8 @@ export enum loginActionType {
   SET_USER = 'CARDS/LOGIN/SET_USER',
   SET_ERROR = 'CARDS/LOGIN/SET_ERROR',
   SET_SUCCESS = 'CARDS/LOGIN/SET_SUCCESS',
-  CHANGE_USER = 'CARDS/LOGIN/CHANGE_USER'
+  CHANGE_USER = 'CARDS/LOGIN/CHANGE_USER',
+  IS_INITIAL = 'CARDS/LOGIN/IS_INITIAL'
 }
 
 const user = {
@@ -28,6 +29,7 @@ const initialState: StateType = {
   loading: false,
   success: false,
   error: '',
+  isInitial: false
 };
 
 export const loginReducer = (
@@ -56,6 +58,11 @@ export const loginReducer = (
         success: action.payload.success,
         error: '',
       };
+      case loginActionType.IS_INITIAL:
+      return {
+        ...state,
+        isInitial: action.payload.isInitial,
+      };
     case loginActionType.SET_ERROR:
       return {
         ...state,
@@ -82,6 +89,13 @@ export const setSuccess = (success: boolean) =>
       success,
     },
   } as const);
+export const setIsInitial = (isInitial: boolean) =>
+  ({
+    type: loginActionType.IS_INITIAL,
+    payload: {
+      isInitial,
+    },
+  } as const);
 export const setUser = (user: UserType) => ({ type: loginActionType.SET_USER, user } as const);
 export const setError = (error: string) =>
   ({
@@ -102,6 +116,7 @@ export const loginPageTC = (email: string, password: string, rememberMe: boolean
     dispatch(setLoading(true));
     let data = await authAPI.login(email, password, rememberMe);
     dispatch(setUser(data));
+    dispatch(setError(''));
     dispatch(setSuccess(true));
   } catch (e) {
     const error = e.response
@@ -128,8 +143,10 @@ export const isAuthTC = (): ThunkType<ActionsType> => async (dispatch) => {
   try {
     dispatch(setLoading(true));
     let data = await isAuthAPI.isAuth();
-    dispatch(setLoading(false));
+    dispatch(setIsInitial(true))
     dispatch(setUser(data));
+    dispatch(setError(''));
+    dispatch(setLoading(false));
   } catch (e) {
     const error = e.response
       ? e.response.data.error
@@ -157,13 +174,15 @@ export type StateType = {
   loading: boolean;
   success: boolean;
   error: string;
+  isInitial: boolean;
 };
 
 type ActionsType = ReturnType<typeof setLoading>
   | ReturnType<typeof setUser>
   | ReturnType<typeof setError>
   | ReturnType<typeof setSuccess>
-  | ReturnType<typeof changeUser>;
+  | ReturnType<typeof changeUser>
+  | ReturnType<typeof setIsInitial>;
 
 export type UserType = {
   _id: string;

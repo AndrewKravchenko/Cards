@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { ProfilePage } from '../../../pages/profile/ui/ProfilePage';
 import { LoginPage } from '../../../pages/login/ui/LoginPage';
@@ -8,6 +8,8 @@ import { RecoveryPassPage } from '../../../pages/recoveryPass/ui/RecoveryPassPag
 import { SetPassPage } from '../../../pages/setPass/ui/SetPassPage';
 import { TestPage } from '../../../pages/test/ui/TestPage';
 import { Error404Page } from '../../../pages/error404/ui/Error404Page';
+import { PacksPage } from '../../../pages/packs/ui/PacksPage';
+import { CardsPage } from '../../../pages/cards/ui/CardsPage';
 
 export const PATH = {
   LOGIN: '/login',
@@ -15,6 +17,8 @@ export const PATH = {
   RECOVERY_PASS: '/recovery-pass',
   SET_PASS: '/set-pass',
   PROFILE: '/profile',
+  PACKS: '/packs',
+  CARDS: '/cards',
   TEST: '/test',
   ERROR_404: '/error404',
 };
@@ -26,6 +30,8 @@ export const Routes: FC = () => {
         <Route path="/" exact render={() => <Redirect to={PATH.PROFILE} />} />
 
         <Route path={PATH.PROFILE} render={() => <ProfilePage />} />
+        <Route path={PATH.PACKS} render={() => <PacksPage />} />
+        <Route path={PATH.CARDS+'/:cardsPack_id?'} render={() => <CardsPage />} />
         <Route path={PATH.LOGIN} render={() => <LoginPage />} />
         <Route path={PATH.REGISTRATION} render={() => <RegistrationPage />} />
         <Route path={PATH.RECOVERY_PASS} render={() => <RecoveryPassPage />} />

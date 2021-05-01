@@ -9,7 +9,9 @@ export const logOutAPI = {
 export const isAuthAPI = {
   isAuth() {
     return API.post(`auth/me`)
-      .then(response => response.data);
+      .then(response => {
+        return response.data
+      });
   },
 };
 export const changeAuthAPI = {

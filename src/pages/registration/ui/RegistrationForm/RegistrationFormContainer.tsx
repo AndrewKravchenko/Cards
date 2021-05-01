@@ -6,6 +6,7 @@ import {
 } from '../../../../utils/textTransform';
 import { PATH } from '../../../../main/ui/App/Routes';
 import {RegistrationForm} from "./RegistrationForm";
+import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
 
 
 export const RegistrationFormContainer: FC = () => {
@@ -17,9 +18,4 @@ export const RegistrationFormContainer: FC = () => {
   };
 
   return <RegistrationForm loginLink={loginLink} />;
-};
-
-export type LoginLinkType = {
-  link: string;
-  title: string;
 };
