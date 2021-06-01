@@ -1,0 +1,30 @@
+.paginator {
+  user-select: none;
+  font-size: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+
+  button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+  }
+
+  & > button {
+    background: rgba(23, 162, 184, 0.25);
+  }
+
+  button:hover {
+    background: rgba(39, 184, 23, 0.56);
+    font-weight: bold;
+    color: white;
+  }
+
+
+  .active {
+    font-weight: bold;
+    color: white;
+    background: rgba(39, 184, 23, 0.56);
+  }
+}
+
+
