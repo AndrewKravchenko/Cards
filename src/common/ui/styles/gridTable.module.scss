@@ -1,0 +1,26 @@
+@import "src/common/ui/styles/base/variables";
+
+.gridHeaderTable {
+  grid-template-columns: repeat(6, 200px);
+  margin-bottom: 2px;
+  div {
+    display: flex;
+    min-height: 48.4px;
+    justify-content: center;
+    background: #acacac;
+    border: 1px solid black;
+    align-items: center;
+    border-radius: 3px;
+
+    &:last-child {
+      border-top-right-radius: 10px;
+    }
+  }
+}
+.gridContainerTable {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  background: white;
+  gap: 2px;
+}
