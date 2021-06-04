@@ -7,7 +7,11 @@ type PropsType = {
   clickHandler?: () => void;
 };
 
-export const ErrorMessage: FC<PropsType> = ({ children, clickHandler }) => {
+export const ErrorMessage: FC<PropsType> = ({
+  children,
+  clickHandler
+}) => {
+
   return (
     <div className={s.message}>
       <p>{children}</p>
