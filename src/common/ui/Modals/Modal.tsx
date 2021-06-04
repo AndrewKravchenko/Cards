@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
-import s from '../../../pages/packs/ui/PacksContainer/Packs.module.scss';
+import s from './Modal.module.scss';
 
 type PropsType = {
   deactivateEditMode: () => void
 }
-export const  Modal: FC<PropsType> = ({deactivateEditMode, children}) => {
+export const  Modal: FC<PropsType> = ({
+  deactivateEditMode,
+  children
+}) => {
 
   return <div onClick={ deactivateEditMode} className={s.packsModal}>
     <form onClick={(e) =>
