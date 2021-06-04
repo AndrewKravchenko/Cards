@@ -1,0 +1,32 @@
+.gridHeaderTable {
+  composes: gridContainerTable from "../../../../common/ui/styles/gridTable.module.scss";
+  grid-template-columns: repeat(6, 200px);
+  margin-bottom: 2px;
+  composes: gridHeaderTable from "../../../../common/ui/styles/gridTable.module.scss";
+  & :first-child {
+    border-top-left-radius: 10px;
+  }
+}
+  .hGridContainer {
+    composes: gridContainerTable from "../../../../common/ui/styles/gridTable.module.scss";
+    grid-template-columns: repeat(6, 200px);
+
+    div {
+      display: flex;
+      min-height: 48.4px;
+      justify-content: center;
+      background: #D8544FFF;
+      border: 1px solid black;
+      align-items: center;
+      border-radius: 3px;
+      &:last-child {
+        border-bottom-right-radius: 10px;
+      }
+      &:nth-child(6n) {
+        justify-content: space-around;
+      }
+      &:nth-last-child(6) {
+        border-bottom-left-radius: 10px;
+      }
+    }
+  }
