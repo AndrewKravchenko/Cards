@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
 import { LoginForm } from './LoginForm';
 import { PATH } from '../../../../main/ui/App/Routes';
-import { capitalizeFirstLetter, transformLinkToTitle } from '../../../../utils/textTransform';
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../../../hooks/useTypedSelector';
-import { loginPageTC, setError, setSuccess } from '../../bll/loginReducer';
+import {
+  capitalizeFirstLetter,
+  transformLinkToTitle,
+} from '../../../../utils/textTransform';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginPageTC, setErrorLogin } from '../../bll/authReducer';
+import { selectLogin } from '../../bll/selectLogin';
 
 export const LoginFormContainer: FC = () => {
   const dispatch = useDispatch();
@@ -21,33 +24,23 @@ export const LoginFormContainer: FC = () => {
       title: capitalizeFirstLetter(transformLinkToTitle(' Registration')),
     },
   ];
-
-  const userId = useTypedSelector<string>((state) => state.login.user._id);
-  const loading = useTypedSelector<boolean>(
-    (state) => state.login.loading,
-  );
-  const success = useTypedSelector<boolean>(
-    (state) => state.login.success,
-  );
-  const error = useTypedSelector<string>((state) => state.login.error);
-
+  const {
+    error,
+    loading,
+    user
+  } = useSelector(selectLogin)
+  const userId = user._id;
   const sendLogin = (email: string, password: string, rememberMe: boolean) => {
     dispatch(loginPageTC(email, password, rememberMe));
   };
-
-  const setSuc = (success: boolean) => {
-    dispatch(setSuccess(success));
-  };
   const closeMessage = (error: string) => {
-    dispatch(setError(error));
+    dispatch(setErrorLogin(error));
   };
 
   return <LoginForm loginLinks={loginLinks}
                     sendLogin={sendLogin}
                     loading={loading}
-                    success={success}
                     userId={userId}
-                    setSuc={setSuc}
                     error={error}
                     closeMessage={closeMessage}
                     redirectLink={PROFILE}

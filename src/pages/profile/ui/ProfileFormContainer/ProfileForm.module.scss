@@ -2,25 +2,19 @@
 
 .form {
   composes: form from "../../../../common/ui/styles/form.module.scss";
+  max-width: 280px;
 
-  & > span {
-    color: $theme-color-dark;
-  }
-
-  & > button {
-    margin-top: 18px;
-    margin-bottom: 18px;
+  .img {
+    text-align: center;
+    & > img {
+      max-width: 250px;
+      max-height: 250px;
+    }
   }
 }
-
-.linksForm {
+.avatar{
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-.link {
-  composes: link from "../../../../common/ui/LinkNative/LinkNative.module.scss";
-}
-
-
-

@@ -1,5 +1,5 @@
-import { API } from '../../../main/dal/api';
 import { message } from './messageTemplate';
+import axios from 'axios';
 
 export type RequestDataType = {
   email: string;
@@ -16,9 +16,9 @@ type ResponseDataType = {
 
 export const recoveryPassApi = {
   sendEmail({ email }: RequestDataType): Promise<ResponseDataType> {
-    return API.post<ResponseDataType>(`auth/forgot`, {
+    return axios.post<ResponseDataType>(`https://neko-back.herokuapp.com/2.0/auth/forgot`, {
       email,
-      from: 'Andrei Shved  <svensk.tut.by@gmail.com>',
+      from: 'Card <mozgche6@gmail.com>',
       message,
     }).then((res) => res.data);
   },

@@ -1,20 +1,17 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { Button } from '../../../../common/ui/Button';
-import s from '../../../recoveryPass/ui/RecoveryPassForm/RecoveryPassForm.module.scss';
-import { Preloader } from '../../../../common/ui/Preloader';
-import { ErrorMessage } from '../../../../common/ui/ErrorMessage';
-import { Redirect } from 'react-router-dom';
+import s
+  from './ProfileForm.module.scss';
 import { InputText } from '../../../../common/ui/InputText';
-import { UserType } from '../../../login/bll/loginReducer';
+import { setErrorLogin, UserType } from '../../../login/bll/authReducer';
+import { InfoErrorMessage } from '../../../../common/ui/InfoErrorMessage/InfoErrorMessage';
+import { FileInput } from '../../../../common/ui/InputFile';
 
 type PropsType = {
   loading: boolean;
   sendLogOut: () => void;
   changeAuth: (name: string, avatar: string) => void;
   error: string;
-  closeMessage: (error: string) => void;
-  redirectLink: string;
-  userId: string;
   user: UserType;
 };
 
@@ -22,9 +19,6 @@ export const ProfileForm: FC<PropsType> = ({
                                              loading,
                                              sendLogOut,
                                              error,
-                                             closeMessage,
-                                             redirectLink,
-                                             userId,
                                              user,
                                              changeAuth,
                                            }) => {
@@ -33,18 +27,10 @@ export const ProfileForm: FC<PropsType> = ({
   let [name, setName] = useState(user.name);
   let [avatar, setAvatar] = useState(user.avatar);
 
-  const closeMessageHandler = () => {
-    closeMessage('');
-  };
-
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     sendLogOut();
   };
-
-  if (userId === '') {
-    return <Redirect to={redirectLink} />;
-  }
 
   const activateEditMode = (value: string) => () => {
     if (value === 'name') {
@@ -67,16 +53,25 @@ export const ProfileForm: FC<PropsType> = ({
   };
 
   return <form className={s.form} onSubmit={submitHandler}>
-    <div className={s.messageWrapper}>
+    <InfoErrorMessage
+      loading={loading}
+      error={error}
+      action={setErrorLogin('')}
+    />
+
+    <div className={s.img}>
       <img src={user.avatar} alt={''} />
+      <FileInput />
+    </div>
+
       <div>
         {
           !editModeAvatar ?
-            <div>
-              {'avatar: '}
-              <span className={s.spanAvatar} onDoubleClick={activateEditMode('avatar')}>
+            <div className={s.avatar}>
+             <div>{'avatar url: '}</div>
+              <div onDoubleClick={activateEditMode('avatar')}>
            {user.avatar}
-            </span>
+            </div>
             </div> : <div>
               <InputText autoFocus={true}
                          onChange={onAvatarChange}
@@ -101,16 +96,6 @@ export const ProfileForm: FC<PropsType> = ({
             </div>
         }
       </div>
-
-      {loading && <Preloader text='Sending...' />}
-
-      {error && (
-        <ErrorMessage clickHandler={closeMessageHandler}>
-          {error}
-        </ErrorMessage>
-      )}
-    </div>
-
     <Button type='submit' disabled={loading}>LogOut</Button>
-  </form>;
+  </form>
 };

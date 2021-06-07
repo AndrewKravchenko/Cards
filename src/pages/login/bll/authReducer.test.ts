@@ -1,4 +1,4 @@
-import { loginReducer, setUser, StateType } from './loginReducer';
+import { authReducer, setUser, StateType } from './authReducer';
 
 const state: StateType = {
   user: {
@@ -18,6 +18,7 @@ const state: StateType = {
   loading: false,
   success: false,
   error: '',
+  isInitial: false
 };
 
 it('user data must be changed', () => {
@@ -36,7 +37,7 @@ it('user data must be changed', () => {
     avatar: ''
   })
   // 2. action
-  let newState = loginReducer(state, action)
+  let newState = authReducer(state, action)
   // 3. expectation
   expect(newState.user._id).toBe('1')
   expect(newState.user.email).toBe('tommy@mail.ru')

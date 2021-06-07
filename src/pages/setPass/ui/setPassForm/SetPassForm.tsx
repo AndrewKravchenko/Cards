@@ -1,7 +1,7 @@
 import React, { FC, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 
-import s from './RegistrationForm.module.scss';
+import s from './SetPassForm.module.scss';
 import { InputText } from '../../../../common/ui/InputText';
 import { Button } from '../../../../common/ui/Button';
 import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
@@ -13,18 +13,17 @@ import { ErrorMessage } from '../../../../common/ui/ErrorMessage';
 
 type PropsType = {
   loginLink: LoginLinkType;
-  createAuth: (email: string, password: string) => void;
+  setNewPassAuth: (password: string) => void;
   closeMessage: (error: string) => void;
   loading: boolean;
 };
 
-export const RegistrationForm: FC<PropsType> = ({
+export const SetPassForm: FC<PropsType> = ({
   loginLink: { link, title },
-  createAuth,
+  setNewPassAuth,
   closeMessage,
   loading,
 }) => {
-  const email = useInput('', { isEmail: true });
   const password = useInput('', {
     minLength: 8,
     isPassword: true
@@ -41,8 +40,8 @@ export const RegistrationForm: FC<PropsType> = ({
     }
     else {
       repeatPassword.setInputError('')
-      if (email.value.trim() && password.value.trim()) {
-        createAuth(email.value, password.value);
+      if ( password.value.trim()) {
+        setNewPassAuth(password.value);
       }
     }
   };
@@ -54,33 +53,18 @@ export const RegistrationForm: FC<PropsType> = ({
       obj.setInputError('')
     }
   };
-  const disabledSubmitBtn = !email.inputValid
-    || !password.inputValid
-    || !repeatPassword.inputValid
-    || loading;
+  const disabledSubmitBtn = !password.inputValid
+                            || !repeatPassword.inputValid
+                            || loading;
 
     return (
         <form className={s.form} onSubmit={submitHandler}>
-          {email.isDirty && email.inputError && (
-            <ErrorMessage clickHandler={closeMessageHandler(email)}>
-              {email.inputError}
-            </ErrorMessage>
-          )}
-
-          <InputText placeholder={'Email'}
-                     type={'email'}
-                     onChange={email.onChange}
-                     onBlur={email.onBlur}
-                     value={email.value}
-                     disabled={loading}
-          />
-
           {password.isDirty && password.inputError && (
             <ErrorMessage clickHandler={closeMessageHandler(password)}>
               {password.inputError}
             </ErrorMessage>
           )}
-          <InputText placeholder={'Password'}
+          <InputText placeholder={'New password'}
                      type={'password'}
                      onChange={password.onChange}
                      onBlur={password.onBlur}
@@ -92,7 +76,7 @@ export const RegistrationForm: FC<PropsType> = ({
               {repeatPassword.inputError}
             </ErrorMessage>
           )}
-          <InputText placeholder={'Repeat password'}
+          <InputText placeholder={'Repeat new password'}
                      type={'password'}
                      onChange={repeatPassword.onChange}
                      onBlur={repeatPassword.onBlur}
@@ -101,7 +85,7 @@ export const RegistrationForm: FC<PropsType> = ({
           />
             <Button type="submit"
                     disabled={disabledSubmitBtn}>
-              Sing Up
+              Set pass
             </Button>
 
             <Link to={link} className={s.link}>

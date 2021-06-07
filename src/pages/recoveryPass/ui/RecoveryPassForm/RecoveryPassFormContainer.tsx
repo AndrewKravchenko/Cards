@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { useTypedSelector } from '../../../../hooks/useTypedSelector';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   capitalizeFirstLetter,
   transformLinkToTitle,
@@ -11,6 +9,7 @@ import { RecoveryPassForm } from './RecoveryPassForm';
 import { sendEmailAsync } from '../../bll/recoveryPassThunk';
 import { recoveryPassActions } from '../../bll/recoveryPassActions';
 import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
+import { selectRecoveryPass } from '../../bll/selectRecoveryPass';
 
 export const RecoveryPassFormContainer: FC = () => {
   const { LOGIN, SET_PASS } = PATH;
@@ -22,13 +21,7 @@ export const RecoveryPassFormContainer: FC = () => {
 
   const dispatch = useDispatch();
 
-  const loading = useTypedSelector<boolean>(
-    (state) => state.recoveryPass.loading,
-  );
-  const success = useTypedSelector<boolean>(
-    (state) => state.recoveryPass.success,
-  );
-  const error = useTypedSelector<string>((state) => state.recoveryPass.error);
+  const {loading, success, error} = useSelector(selectRecoveryPass)
 
   const sendEmail = (email: string) => {
     dispatch(sendEmailAsync(email));

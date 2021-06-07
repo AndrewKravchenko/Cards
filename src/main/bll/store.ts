@@ -9,20 +9,14 @@ import {
 import thunk, { ThunkAction, ThunkMiddleware } from 'redux-thunk';
 
 import { DEV } from '../../config';
-import { loginReducer as login } from '../../pages/login/bll/loginReducer';
-import { registrationReducer as register } from '../../pages/registration/bll/registrationReducer';
+import { authReducer as login } from '../../pages/login/bll/authReducer';
 import { recoveryPassReducer as recoveryPass } from '../../pages/recoveryPass/bll/recoveryPassReducer';
-import { setPassReducer as setPass } from '../../pages/setPass/bll/setPassReducer';
-import { profileReducer as profile } from '../../pages/profile/bll/profileReducer';
 import { packsReducer as packs } from '../../pages/packs/bll/PacksReducer';
 import { cardsReducer as cards } from '../../pages/cards/bll/CardsReducer';
 
 const rootReducer = combineReducers({
   login,
-  register,
   recoveryPass,
-  setPass,
-  profile,
   packs,
   cards
 });

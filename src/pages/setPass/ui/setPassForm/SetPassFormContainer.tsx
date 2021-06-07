@@ -5,17 +5,16 @@ import {
   transformLinkToTitle,
 } from '../../../../utils/textTransform';
 import { PATH } from '../../../../main/ui/App/Routes';
-import { RegistrationForm } from './RegistrationForm';
+import { SetPassForm } from './SetPassForm';
 import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  CreateAuthTC,
-  setErrorLogin,
-} from '../../../login/bll/authReducer';
+import { setErrorLogin, setNewPassTC } from '../../../login/bll/authReducer';
 import { selectLogin } from '../../../login/bll/selectLogin';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 
-export const RegistrationFormContainer: FC = () => {
+export const SetPassFormContainer: FC = () => {
+  const { token } = useParams<{ token: string }>();
+
   const dispatch = useDispatch();
 
   const { LOGIN } = PATH;
@@ -27,8 +26,8 @@ export const RegistrationFormContainer: FC = () => {
     link: LOGIN,
     title: capitalizeFirstLetter(transformLinkToTitle(LOGIN)),
   };
-  const createAuth = (email: string, password: string, ) => {
-    dispatch(CreateAuthTC(email, password));
+  const setNewPassAuth = (password: string) => {
+    dispatch(setNewPassTC(password, token));
   };
   const closeMessage = (error: string) => {
     dispatch(setErrorLogin(error));
@@ -37,9 +36,9 @@ export const RegistrationFormContainer: FC = () => {
     return <Redirect to={'/PATH'}/>
   }
 
-  return <RegistrationForm
+  return <SetPassForm
     loginLink={loginLink}
-    createAuth={createAuth}
+    setNewPassAuth={setNewPassAuth}
     closeMessage={closeMessage}
     loading={loading}
   />;

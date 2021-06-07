@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useEffect, useState } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 
 import s from './LoginForm.module.scss';
 import { InputText } from '../../../../common/ui/InputText';
@@ -7,50 +7,46 @@ import { Button } from '../../../../common/ui/Button';
 import { LoginLinkType } from './LoginFormContainer';
 import { InputCheckbox } from '../../../../common/ui/InputCheckbox';
 import { randomId } from '../../../../utils/randomId';
-import { Preloader } from '../../../../common/ui/Preloader';
-import { HookInputType, useInput } from '../../../../hooks/ValidationFormAndrew';
+import {
+  HookInputType,
+  useInput,
+} from '../../../../hooks/ValidationFormAndrew';
 import { ErrorMessage } from '../../../../common/ui/ErrorMessage';
+import { InfoErrorMessage } from '../../../../common/ui/InfoErrorMessage/InfoErrorMessage';
+import { setErrorLogin } from '../../bll/authReducer';
 
 type PropsType = {
   loginLinks: LoginLinkType[];
   sendLogin: (email: string, password: string, rememberMe: boolean) => void;
   closeMessage: (error: string) => void;
   loading: boolean;
-  success: boolean;
-  setSuc: (success: boolean) => void;
   error: string;
   redirectLink: string;
   userId: string;
 };
 
 export const LoginForm: FC<PropsType> = ({
-                                           loginLinks,
-                                           sendLogin,
-                                           loading,
-                                           success,
-                                           setSuc,
-                                           error,
-                                           userId,
-                                           closeMessage,
-                                           redirectLink,
-                                         }) => {
+  loginLinks,
+  sendLogin,
+  loading,
+  error,
+  userId,
+  closeMessage,
+  redirectLink
+}) => {
   const [rememberMe, setRememberMe] = useState(false);
   const email = useInput('', { isEmail: true });
-  const password = useInput('', { minLength: 8, isPassword: true });
+  const password = useInput('', {
+    minLength: 8,
+    isPassword: true
+  });
 
-  useEffect(() => {
-    if (success) {
-      email.setValue('');
-      password.setValue('');
-      setRememberMe(false);
-      setSuc(false);
-    }
-  }, [success, setSuc, email, password]);
+  if (userId) {
+    return <Redirect to={redirectLink} />;
+  }
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-
     if (email.value.trim() && password.value.trim()) {
       sendLogin(email.value, password.value, rememberMe);
     }
@@ -63,20 +59,16 @@ export const LoginForm: FC<PropsType> = ({
     }
   };
 
-  if (userId) {
-    return <Redirect to={redirectLink} />;
-  }
+  const disabledSubmitBtn = !email.inputValid
+                            || !password.inputValid
+                            || loading;
 
   return <form className={s.form} onSubmit={submitHandler}>
-    <div className={s.messageWrapper}>
-      {loading && <Preloader text='Sending...' />}
-      {error && (
-        <ErrorMessage clickHandler={closeMessageHandler()}>
-          {error}
-        </ErrorMessage>
-      )}
-    </div>
-
+    <InfoErrorMessage
+      loading={loading}
+      error={error}
+      action={setErrorLogin('')}
+    />
     {email.isDirty && email.inputError && (
       <ErrorMessage clickHandler={closeMessageHandler(email)}>
         {email.inputError}
@@ -86,7 +78,7 @@ export const LoginForm: FC<PropsType> = ({
     <InputText placeholder={'Login'}
                type={'email'}
                onChange={e => email.onChange(e)}
-               onBlur={e => email.onBlur(e)}
+               onBlur={email.onBlur}
                value={email.value}
                disabled={loading}
     />
@@ -99,7 +91,7 @@ export const LoginForm: FC<PropsType> = ({
     <InputText placeholder={'Password'}
                type={'password'}
                onChange={e => password.onChange(e)}
-               onBlur={e => password.onBlur(e)}
+               onBlur={password.onBlur}
                value={password.value}
                disabled={loading}
     />
@@ -109,7 +101,10 @@ export const LoginForm: FC<PropsType> = ({
     > Remember me
     </InputCheckbox>
 
-    <Button type='submit' disabled={!email.inputValid || !password.inputValid || loading}>Submit</Button>
+    <Button type='submit'
+            disabled={disabledSubmitBtn}>
+      Submit
+    </Button>
 
     <div className={s.linksForm}>
       {loginLinks.map(({ link, title }) => (

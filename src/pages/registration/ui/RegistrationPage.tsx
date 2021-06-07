@@ -3,10 +3,6 @@ import React, {FC} from 'react';
 import s from './RegistrationPage.module.scss';
 import {RegistrationFormContainer} from "./RegistrationForm/RegistrationFormContainer";
 
-
-
-
-
 export const RegistrationPage: FC = () => {
 
     return (

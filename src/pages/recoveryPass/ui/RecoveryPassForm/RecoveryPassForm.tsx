@@ -4,9 +4,9 @@ import { Link, Redirect } from 'react-router-dom';
 import s from './RecoveryPassForm.module.scss';
 import { InputText } from '../../../../common/ui/InputText';
 import { Button } from '../../../../common/ui/Button';
-import { Preloader } from '../../../../common/ui/Preloader';
-import { ErrorMessage } from '../../../../common/ui/ErrorMessage';
 import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
+import { InfoErrorMessage } from '../../../../common/ui/InfoErrorMessage/InfoErrorMessage';
+import { recoveryPassActions } from '../../bll/recoveryPassActions';
 
 type PropsType = {
   loginLink: LoginLinkType;
@@ -22,7 +22,6 @@ type PropsType = {
 export const RecoveryPassForm: FC<PropsType> = ({
   loginLink: { link, title },
   sendEmail,
-  closeMessage,
   setSuccess,
   loading,
   success,
@@ -32,6 +31,7 @@ export const RecoveryPassForm: FC<PropsType> = ({
   const [email, setEmail] = useState('');
 
   useEffect(() => {
+    console.log('asdasd');
     if (success) {
       setEmail('');
       setSuccess(false);
@@ -46,25 +46,17 @@ export const RecoveryPassForm: FC<PropsType> = ({
     }
   };
 
-  const closeMessageHandler = () => {
-    closeMessage('');
-  };
-
   if (success) {
     return <Redirect to={redirectLink} />;
   }
 
   return (
     <form className={s.form} onSubmit={submitHandler}>
-      <div className={s.messageWrapper}>
-        {loading && <Preloader text="Sending..." />}
-
-        {error && (
-          <ErrorMessage clickHandler={closeMessageHandler}>
-            {error}
-          </ErrorMessage>
-        )}
-      </div>
+      <InfoErrorMessage
+        loading={loading}
+        error={error}
+        action={recoveryPassActions.setError('')}
+      />
 
       <InputText
         type="email"

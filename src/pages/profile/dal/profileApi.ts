@@ -1,4 +1,5 @@
-import { API } from '../../../main/dal/api';
+import { API, FileAPI } from '../../../main/dal/api';
+import { ResponseUserDataType } from '../../login/dal/loginApi';
 
 export const logOutAPI = {
   logOut() {
@@ -8,15 +9,30 @@ export const logOutAPI = {
 };
 export const isAuthAPI = {
   isAuth() {
-    return API.post(`auth/me`)
+    return API.post<ResponseUserDataType>(`auth/me`)
       .then(response => {
-        return response.data
+        return response.data;
       });
   },
 };
+type ResponseChangeAuth = { updatedUser: ResponseUserDataType };
 export const changeAuthAPI = {
-  changeAuth(name: string, avatar: string) {
-    return API.put(`auth/me`, {name, avatar})
+  changeAuth({ name, avatar }: RequestChangeUserDataType) {
+    return API.put<ResponseChangeAuth>(`auth/me`, { name, avatar })
       .then(response => response.data);
   },
+};
+export const changeAuthImageAPI = {
+  changeAuthImage({ fileData }: RequestChangeAuthImageDataType) {
+    return FileAPI.post(`file`, fileData)
+      .then(response => response.data);
+  }
+};
+
+type RequestChangeUserDataType = {
+  name: string;
+  avatar: string;
+};
+type RequestChangeAuthImageDataType = {
+  fileData: FormData;
 };

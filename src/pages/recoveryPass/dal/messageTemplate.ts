@@ -13,10 +13,10 @@ export const message = `<html xmlns="http://www.w3.org/1999/xhtml">
                <p style="text-align:left">Hello,<br><br> We received a request to reset the password for your account for this email address. To initiate the password reset process for your account, click the link below.
               </p>
               <p>
-                <a target="_blank" style="text-decoration:none; background-color: #17a2b8; border: #17a2b8 1px solid; color: #fff; padding:10px 10px; display:block;" href="https://svensktutby.github.io/cards/#/set-pass/$token$">
+                <a target="_blank" style="text-decoration:none; background-color: #17a2b8; border: #17a2b8 1px solid; color: #fff; padding:10px 10px; display:block;" href="https://andrewkravchenko.github.io/Cards/#/set-pass/$token$">
                   <strong>Reset Password</strong></a>
               </p>
-              <p style="text-align:left">This link can only be used once. If you need to reset your password again, please visit <a href="https://svensktutby.github.io/cards/">our site</a> and request another reset.<br><br>If you did not make this request, you can simply ignore this email.</p>
+              <p style="text-align:left">This link can only be used once. If you need to reset your password again, please visit <a href="https://andrewkravchenko.github.io/Cards/">our site</a> and request another reset.<br><br>If you did not make this request, you can simply ignore this email.</p>
               <p style="text-align:left">
               Sincerely,<br>The Card website Team
               </p>
@@ -26,4 +26,4 @@ export const message = `<html xmlns="http://www.w3.org/1999/xhtml">
       </table>
     </center>
   </body>
-</html>`;
+</html>`

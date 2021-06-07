@@ -5,6 +5,7 @@ type ValidationsType = {
   isEmail?: boolean
   minLength?: number
   isPassword?: boolean
+  repeatPass?: boolean
 }
 
 const useValidation = (value: string, validations: ValidationsType) => {
@@ -15,19 +16,33 @@ const useValidation = (value: string, validations: ValidationsType) => {
     for (const validation in validations) {
       switch (validation) {
         case 'isEmail':
-          const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          const reForMail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           if (value.length === 0) {
             setInputError('Email is required');
           } else {
-            re.test(String(value).toLowerCase()) ? setInputError('') : setInputError('Email address is invalid');
+            reForMail.test(String(value).toLowerCase())
+              ? setInputError('')
+              : setInputError('Email address is invalid');
           }
           break;
         case 'isPassword':
-          if (value.length === 0) {
+          if (!value.length) {
             setInputError('Password is required');
-          } else value.length < (validations.minLength ? validations.minLength : 8)
-            ? setInputError('Password must be 8 or more characters')
-            : setInputError('');
+          } else {
+            const minLength = validations.minLength
+              ? validations.minLength
+              : 8;
+            value.length < minLength
+              ? setInputError('Password must be 8 or more characters')
+              : setInputError('');
+          }
+          break;
+        case 'repeatPass':
+          if (!value.length) {
+            setInputError('Password is required');
+          } else if (inputError !== 'Passwords must be same') {
+            setInputError('');
+          }
       }
     }
   }, [value, validations]);
@@ -56,7 +71,7 @@ export const useInput = (initialValue: string, validations: ValidationsType) => 
     setValue(e.target.value);
   };
 
-  const onBlur = (e: ChangeEvent<HTMLInputElement>) => {
+  const onBlur = () => {
     setDirty(true);
   };
 

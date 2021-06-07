@@ -5,12 +5,16 @@ import { ErrorMessage } from '../ErrorMessage';
 import { ActionsCardsType } from '../../../pages/cards/bll/CardsReducer';
 import { ActionsPacksType } from '../../../pages/packs/bll/PacksReducer';
 import { useDispatch } from 'react-redux';
-import { ActionsLoginType } from '../../../pages/login/bll/loginReducer';
+import { ActionsLoginType } from '../../../pages/login/bll/authReducer';
+import { RecoveryPassActionsType } from '../../../pages/recoveryPass/bll/recoveryPassActions';
 
 type PropsType = {
   error: string;
   loading: boolean;
-  action: ActionsCardsType | ActionsPacksType | ActionsLoginType;
+  action: ActionsCardsType
+          | ActionsPacksType
+          | ActionsLoginType
+          | RecoveryPassActionsType;
 };
 
 export const InfoErrorMessage: FC<PropsType> = ({
@@ -23,7 +27,6 @@ export const InfoErrorMessage: FC<PropsType> = ({
   const closeMessage = () => {
     dispatch(action);
   };
-
   return (
     <div className={s.messageWrapper}>
       {loading && <Preloader text='Sending...' />}

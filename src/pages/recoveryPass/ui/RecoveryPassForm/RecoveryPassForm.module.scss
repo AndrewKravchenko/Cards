@@ -2,11 +2,6 @@
   composes: form from "../../../../common/ui/styles/form.module.scss";
 }
 
-.messageWrapper {
-  max-width: 280px;
-  min-height: 50px;
-}
-
 .link {
   composes: link from "../../../../common/ui/LinkNative/LinkNative.module.scss";
 }
