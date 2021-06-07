@@ -124,7 +124,6 @@ export const updateGradeCardTC = (
 ): ThunkType<ActionsCardsType> =>
   async (dispatch) => {
     try {
-      debugger
       dispatch(setLoadingCards(true));
       await cardsApi.updatedGradeCard(
         { grade, card_id }

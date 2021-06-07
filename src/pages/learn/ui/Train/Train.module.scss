@@ -1,0 +1,18 @@
+.trainBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .grade {
+    display: flex;
+    justify-content: space-around;
+    min-width: 700px;
+  }
+
+  div {
+    padding-top: 20px;
+  }
+  .active{
+    background-color: green;
+  }
+}

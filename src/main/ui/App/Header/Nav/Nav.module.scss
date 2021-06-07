@@ -21,7 +21,7 @@ $btnHorPad: ($btnSize - $lineW) / 2;
 $btnVertPad: ($btnSize - $linesTotalH) / 2;
 $itemsLeftPad: 20px;
 $itemsRightPad: $itemsLeftPad + $btnSize;
-$itemWidth: 100px;
+$itemWidth: 90px;
 $itemPad: 10px;
 $navItemsWidth: $itemsLeftPad + $itemsRightPad + $itemWidth * $numOfItems;
 $textAT: $navAT - $textDelayStep * ($numOfItems - 1);
@@ -29,6 +29,7 @@ $textFadeAT: 0.2s;
 $cub: cubic-bezier(0.48, 0.43, 0.29, 1.3);
 $backCub: cubic-bezier(0.49, -0.3, 0.68, 1.23);
 $textCub: cubic-bezier(0.48, 0.43, 0.7, 2.5);
+
 
 .nav {
   width: auto;
