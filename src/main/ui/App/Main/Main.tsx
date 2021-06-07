@@ -1,9 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 import s from './Main.module.scss';
 import { Routes } from '../Routes';
-import { useDispatch } from 'react-redux';
-import { isAuthTC } from '../../../../pages/login/bll/loginReducer';
 
 export const Main: FC = () => {
 

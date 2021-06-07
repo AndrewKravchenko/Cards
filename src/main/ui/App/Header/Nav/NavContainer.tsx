@@ -8,7 +8,8 @@ import {
 import { Nav } from './Nav';
 
 export const NavContainer: FC = () => {
-  const navLinks: Array<NavLinkType> = Object.values(PATH).map((navLink) => ({
+  const navLinks: Array<NavLinkType> = Object.values(PATH).filter(link => link !== PATH.CARDS && link !== PATH.TRAIN)
+    .map((navLink) => ({
     link: navLink,
     title: capitalizeFirstLetter(transformLinkToTitle(navLink)),
   }));

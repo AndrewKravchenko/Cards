@@ -1,13 +1,12 @@
 import React, { ChangeEvent } from 'react';
-
 import s from './Paginator.module.scss';
 
 export const Pagination = ({
-totalPages,
-page,
-handleChangePage,
-pageCount,
-setPageCount
+  totalPages,
+  page,
+  handleChangePage,
+  pageCount,
+  setPageCount
 }: PaginatorType) => {
   let pattern = null;
 
@@ -37,7 +36,8 @@ setPageCount
         && +e.currentTarget.value !== 0
         && +e.currentTarget.value <= 25)
     {
-      const newPageCount = parseInt(e.currentTarget.value.replace(/\+|\-/ig, ''), 10);
+      const newPageCount = parseInt(e.currentTarget.value
+        .replace(/\+|\-/ig, ''), 10);
       changeNumber(Math.floor(pageCount * page / newPageCount))
       setPageCount(newPageCount);
     }
@@ -45,7 +45,9 @@ setPageCount
   return (
     <div className={s.paginatorBlock}>
       <div className={s.paginator}>
-        <button disabled={page <= 1} onClick={() => changeNumber(page - 1)}>
+        <button disabled={page <= 1}
+                onClick={() => changeNumber(page - 1)}
+        >
           {'<'}
         </button>
         {pattern.map((label, index) => (
