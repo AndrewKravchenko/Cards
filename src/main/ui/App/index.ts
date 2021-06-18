@@ -1,1 +1,2 @@
-export * from './App';
+export {Routes} from "./Routes";
+export {App} from './App';

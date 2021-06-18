@@ -1,9 +1,8 @@
 import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import s from './Nav.module.scss';
-import { randomId } from '../../../../../utils/randomId';
 import { NavLinkType } from './NavContainer';
+import { randomId } from 'src/utils/randomId';
 
 type PropsType = {
   navLinks: Array<NavLinkType>;

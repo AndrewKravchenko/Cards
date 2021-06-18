@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import s from './Train.module.scss';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useTypedSelector } from '../../../../hooks/useTypedSelector';
-import { CardsType } from '../../../cards/dal/CardsApi';
-import { Button } from '../../../../common/ui/Button';
+import { CardsType } from 'src/pages/cards/dal/CardsApi';
 import {
   getCardsTC,
   setErrorCards,
   updateGradeCardTC,
-} from '../../../cards/bll/CardsReducer';
-import s from './Train.module.scss';
-import { InfoErrorMessage } from '../../../../common/ui/InfoErrorMessage/InfoErrorMessage';
+} from 'src/pages/cards/bll/CardsReducer';
+import { Button } from 'src/common/ui/Button';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { InfoErrorMessage } from 'src/common/ui/InfoErrorMessage';
 
 const grades = ['не знал', 'забыл', 'долго думал', 'перепутал', 'знал'];
 
@@ -18,7 +18,8 @@ const getCard = (cards: CardsType[]) => {
   const sum = cards.reduce((acc, card) =>
     acc + (6 - card.grade) * (6 - card.grade), 0);
   const rand = Math.random() * sum;
-  const res = cards.reduce((acc: { sum: number, id: number }, card, i) => {
+  const res = cards.reduce(
+    (acc: { sum: number, id: number }, card, i) => {
       const newSum = acc.sum + (6 - card.grade) * (6 - card.grade);
       return { sum: newSum, id: newSum < rand ? i : acc.id };
     }
@@ -31,8 +32,8 @@ export const Train = () => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [first, setFirst] = useState<boolean>(true);
   const [estimate, setEstimate] = useState<number>(-1);
-  const { cards } = useTypedSelector((state) => state.cards);
-  const error = useTypedSelector<string>((state) => state.cards.error);
+  const { cards } = useTypedSelector(state => state.cards);
+  const error = useTypedSelector<string>(state=> state.cards.error);
 
   const [card, setCard] = useState<CardsType>({
     _id: 'fake',
@@ -49,8 +50,7 @@ export const Train = () => {
     updated: '',
   });
 
-  const loading = useTypedSelector<boolean>((state) => state.cards.loading);
-
+  const loading = useTypedSelector<boolean>(state => state.cards.loading);
   const { cardsPack_id } = useParams<{ cardsPack_id: string }>();
   const dispatch: Function = useDispatch();
 
@@ -71,7 +71,11 @@ export const Train = () => {
     setIsChecked(false);
 
     if (cards.length > 0) {
-      dispatch(updateGradeCardTC(card.cardsPack_id, card._id, estimate + 1));
+      dispatch(updateGradeCardTC(
+        card.cardsPack_id,
+        card._id,
+        estimate + 1)
+      );
       setCard(getCard(cards));
       setEstimate(-1);
     } else {
@@ -88,7 +92,9 @@ export const Train = () => {
       <div className={s.trainBlock}>
         <div>{card.question}</div>
         <div>
-          <Button onClick={() => setIsChecked(true)}>check</Button>
+          <Button onClick={() => setIsChecked(true)}>
+            check
+          </Button>
         </div>
 
         {isChecked && (
@@ -96,13 +102,17 @@ export const Train = () => {
             <div>{card.answer}</div>
             <div className={s.grade}>
               {grades.map((g, value) => (
-                <Button className={estimate === value ? s.active : ''} key={'grade-' + value}
-                        onClick={() => {
-                          setEstimateHandler(value);
-                        }}>{g}</Button>
+                <Button
+                  className={estimate === value ? s.active : ''}
+                  key={'grade-' + value}
+                  onClick={() => {setEstimateHandler(value)}}>
+                  {g}
+                </Button>
               ))}
             </div>
-            <div><Button onClick={onNext}>next</Button></div>
+            <div>
+              <Button onClick={onNext}>next</Button>
+            </div>
           </>
         )}
       </div>

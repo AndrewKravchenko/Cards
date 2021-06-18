@@ -1,17 +1,19 @@
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import { ProfilePage } from '../../../pages/profile/ui/ProfilePage';
-import { PacksPage } from '../../../pages/packs/ui/PacksPage';
-import { TrainPage } from '../../../pages/learn/ui/TrainPage';
-import { CardsPage } from '../../../pages/cards/ui/CardsPage';
-import { TestPage } from '../../../pages/test/ui/TestPage';
 import React from 'react';
-import { PATH } from './Routes';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { useTypedSelector } from 'src/hooks';
+import { PATH } from 'src/main/ui/App/Routes';
+import { TestPage } from 'src/pages/test/ui/TestPage';
+import { PacksPage } from 'src/pages/packs/ui/PacksPage';
+import { TrainPage } from 'src/pages/learn/ui/TrainPage';
+import { CardsPage } from 'src/pages/cards/ui/CardsPage';
+import { ProfilePage } from 'src/pages/profile/ui/ProfilePage';
 
 export const NotAuthWithRedirect = () => {
   const userId = useTypedSelector<string>(state => state.login.user._id);
+
   if (!userId)
     return <Redirect to={PATH.LOGIN} />;
+
   return <Switch>
     <Route path={PATH.PROFILE} render={() => <ProfilePage />} />
     <Route path={PATH.PACKS} render={() => <PacksPage />} />

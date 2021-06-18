@@ -1,20 +1,20 @@
 import React, { FC } from 'react';
-import s from './InfoErrorMessage.module.scss';
-import { Preloader } from '../Preloader';
-import { ErrorMessage } from '../ErrorMessage';
-import { ActionsCardsType } from '../../../pages/cards/bll/CardsReducer';
-import { ActionsPacksType } from '../../../pages/packs/bll/PacksReducer';
 import { useDispatch } from 'react-redux';
-import { ActionsLoginType } from '../../../pages/login/bll/authReducer';
-import { RecoveryPassActionsType } from '../../../pages/recoveryPass/bll/recoveryPassActions';
+import s from './InfoErrorMessage.module.scss';
+import { Preloader } from 'src/common/ui/Preloader';
+import { ErrorMessage } from 'src/common/ui/ErrorMessage';
+import { ActionsLoginType } from 'src/pages/login/bll/authReducer';
+import { ActionsCardsType } from 'src/pages/cards/bll/CardsReducer';
+import { ActionsPacksType } from 'src/pages/packs/bll/PacksReducer';
+import { RecoveryPassActionsType } from 'src/pages/recoveryPass/bll/recoveryPassActions';
 
 type PropsType = {
   error: string;
   loading: boolean;
   action: ActionsCardsType
-          | ActionsPacksType
-          | ActionsLoginType
-          | RecoveryPassActionsType;
+      | ActionsPacksType
+      | ActionsLoginType
+      | RecoveryPassActionsType;
 };
 
 export const InfoErrorMessage: FC<PropsType> = ({
@@ -27,11 +27,14 @@ export const InfoErrorMessage: FC<PropsType> = ({
   const closeMessage = () => {
     dispatch(action);
   };
+  if (!error && !loading){
+    return null
+  }
   return (
     <div className={s.messageWrapper}>
       {loading && <Preloader text='Sending...' />}
       {error && (
-        <ErrorMessage clickHandler={closeMessage}>
+        <ErrorMessage clickHandler={closeMessage} >
           {error}
         </ErrorMessage>
       )}

@@ -1,6 +1,5 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
-
-import { FieldsType, ValidateType } from '../utils/formValidationRules';
+import { FieldsType, ValidateType } from 'src/utils/formValidationRules';
 
 export const useForm = (
   initialValues: FieldsType,
@@ -16,7 +15,6 @@ export const useForm = (
     if (Object.keys(errors).length === 0 && isSubmitting && isSent) {
       callback();
     }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errors]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

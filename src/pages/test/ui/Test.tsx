@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-
 import s from './Test.module.scss';
-import { randomId } from '../../../utils/randomId';
-import { ExamplesType } from './TestContainer';
+import { randomId } from 'src/utils/randomId';
+import { ExamplesType } from 'src/pages/test/ui/TestContainer';
 
 type PropsType = {
   examples: ExamplesType;

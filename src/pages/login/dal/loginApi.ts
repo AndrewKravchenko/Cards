@@ -1,8 +1,10 @@
-import { API } from '../../../main/dal/api';
+import { API } from 'src/main/dal/api';
 
 export const authAPI = {
   login({ email, password, rememberMe }: RequestLoginDataType) {
-    return API.post<ResponseUserDataType>(`auth/login`, { email, password, rememberMe })
+    return API.post<ResponseUserDataType>(
+      `auth/login`, { email, password, rememberMe }
+    )
       .then(response => response.data);
   },
 };

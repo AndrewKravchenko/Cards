@@ -15,8 +15,13 @@ const RangeWithTooltip = createSliderWithTooltip(Range);
 
 export const DoubleRange: React.FC<DoubleRangePropsType> = (
   {
-    onChangeRange, value,
-    min, max, step,draggableTrack = true,...restProps
+    onChangeRange,
+    value,
+    min,
+    max,
+    step,
+    draggableTrack = true,
+    ...restProps
   }
 ) => {
 

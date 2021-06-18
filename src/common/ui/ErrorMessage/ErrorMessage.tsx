@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { Button } from 'src/common/ui/Button';
 
 import s from './ErrorMessage.module.scss';
-import { Button } from '../Button';
 
 type PropsType = {
   clickHandler?: () => void;

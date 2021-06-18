@@ -1,4 +1,8 @@
-import { authReducer, setUser, StateType } from './authReducer';
+import {
+  authReducer,
+  setUser,
+  StateType
+} from 'src/pages/login/bll/authReducer';
 
 const state: StateType = {
   user: {

@@ -1,1 +1,1 @@
-export * from './InputRadio';
+export {InputRadio} from './InputRadio';

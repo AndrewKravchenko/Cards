@@ -1,13 +1,13 @@
-import { ThunkType } from '../../../main/bll/store';
-import { authAPI } from '../dal/loginApi';
+import { ThunkType } from 'src/main/bll/store';
+import { authAPI } from 'src/pages/login/dal/loginApi';
 import {
-  changeAuthAPI, changeAuthImageAPI,
+  changeAuthAPI,
+  changeAuthImageAPI,
   isAuthAPI,
   logOutAPI,
 } from '../../profile/dal/profileApi';
-import { createAuthAPI } from '../../registration/dal/RegistrationApi';
-import { setNewPassAPI } from '../../setPass/dal/setPassApi';
-import { FileAPI } from '../../../main/dal/api';
+import { setNewPassAPI } from 'src/pages/setPass/dal/setPassApi';
+import { createAuthAPI } from 'src/pages/registration/dal/RegistrationApi';
 
 export enum loginActionType {
   SET_LOADING = 'AUTH/LOGIN/SET_LOADING',
@@ -247,7 +247,8 @@ export type StateType = {
   isInitial: boolean;
 };
 
-export type ActionsLoginType = ReturnType<typeof setLoading>
+export type ActionsLoginType =
+    ReturnType<typeof setLoading>
   | ReturnType<typeof setUser>
   | ReturnType<typeof setErrorLogin>
   | ReturnType<typeof setSuccess>

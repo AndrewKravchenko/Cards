@@ -1,10 +1,10 @@
 import React, { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react';
-import { changeAuthImageTC } from '../../../pages/login/bll/authReducer';
 import { useDispatch } from 'react-redux';
-import { Button } from '../Button';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { useTypedSelector } from 'src/hooks';
+import { Button } from 'src/common/ui/Button/Button';
+import { changeAuthImageTC } from 'src/pages/login/bll/authReducer';
 
-export const FileInput: React.FC = () => {
+export const InputFile: React.FC = () => {
   const dispatch = useDispatch();
 
   const name = useTypedSelector<string>((state) =>
@@ -48,7 +48,9 @@ export const FileInput: React.FC = () => {
         onChange={upload}
       />
       <Button
-        onClick={addImg}>Change image
+          onClick={addImg}
+      >
+        Change image
       </Button>
       <hr style={{ width: '100%' }} />
     </div>

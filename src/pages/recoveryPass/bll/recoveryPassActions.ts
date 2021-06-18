@@ -1,4 +1,4 @@
-import { InferActionsType } from '../../../main/bll/store';
+import { InferActionsType } from "src/main/bll/store";
 
 export enum RecoveryPassActionType {
   SET_LOADING = 'CARDS/RECOVERY_PASS/SET_LOADING',

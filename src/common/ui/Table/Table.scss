@@ -1,0 +1,69 @@
+.link {
+  composes: link from "../LinkNative/LinkNative.module.scss";
+}
+
+@mixin table($numberOfColumns, $firstBorderRadius) {
+  .gridHeaderTable {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    background: white;
+    gap: 2px;
+    grid-template-columns: repeat($numberOfColumns - 1, 200px) 300px;
+    margin-bottom: 2px;
+    div {
+      display: flex;
+      min-height: 48.4px;
+      justify-content: center;
+      background: #acacac;
+      border: 1px solid black;
+      align-items: center;
+      border-radius: 3px;
+      &:first-child {
+        border-top-left-radius: $firstBorderRadius * 1px;
+      }
+      &:last-child {
+        border-top-right-radius: 10px;
+      }
+    }
+  }
+  .hGridContainer {
+    composes: gridContainerTable from "../styles/gridTable.module.scss";
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    background: white;
+    gap: 2px;
+    grid-template-columns: repeat($numberOfColumns - 1, 200px) 300px ;
+
+    div {
+      display: flex;
+      min-height: 48.4px;
+      justify-content: center;
+      background: #D8544FFF;
+      border: 1px solid black;
+      align-items: center;
+      border-radius: 3px;
+
+      &:last-child {
+        border-bottom-right-radius: 10px;
+      }
+
+      &:nth-child(#{$numberOfColumns}n) {
+        justify-content: space-around;
+      }
+
+      &:nth-last-child(#{$numberOfColumns}) {
+        border-bottom-left-radius: 10px;
+      }
+    }
+  }
+}
+
+.table-sixth-column {
+  @include table(6, 10);
+}
+
+.table-fifth-column {
+  @include table(5, 0)
+}

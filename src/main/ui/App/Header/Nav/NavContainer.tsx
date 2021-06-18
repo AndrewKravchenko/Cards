@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
-
-import { PATH } from '../../Routes';
+import { Nav } from './Nav';
 import {
   capitalizeFirstLetter,
-  transformLinkToTitle,
-} from '../../../../../utils/textTransform';
-import { Nav } from './Nav';
+  transformLinkToTitle
+} from 'src/utils/textTransform';
+import { PATH } from 'src/main/ui/App/Routes';
+
 
 export const NavContainer: FC = () => {
-  const navLinks: Array<NavLinkType> = Object.values(PATH).filter(link => link !== PATH.CARDS && link !== PATH.TRAIN)
+  const navLinks: Array<NavLinkType> = Object.values(PATH)
+      .filter(link => link !== PATH.CARDS && link !== PATH.TRAIN)
     .map((navLink) => ({
     link: navLink,
     title: capitalizeFirstLetter(transformLinkToTitle(navLink)),

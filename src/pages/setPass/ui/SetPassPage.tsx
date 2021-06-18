@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-
 import s from './SetPassPage.module.scss';
-import { SetPassFormContainer } from './setPassForm/SetPassFormContainer';
+import {
+  SetPassFormContainer
+} from 'src/pages/setPass/ui/setPassForm/SetPassFormContainer';
 
 export const SetPassPage: FC = () => {
   return (

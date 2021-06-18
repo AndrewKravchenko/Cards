@@ -1,4 +1,4 @@
-import { API } from '../../../main/dal/api';
+import { API } from "src/main/dal/api";
 
 export const createAuthAPI = {
   createAuth({ email, password }: RequestLoginDataType) {

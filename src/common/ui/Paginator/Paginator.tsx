@@ -45,21 +45,28 @@ export const Pagination = ({
   return (
     <div className={s.paginatorBlock}>
       <div className={s.paginator}>
-        <button disabled={page <= 1}
-                onClick={() => changeNumber(page - 1)}
+        <button
+            disabled={page <= 1}
+            onClick={() => changeNumber(page - 1)}
         >
           {'<'}
         </button>
         {pattern.map((label, index) => (
-          <button key={index}
-                  className={page === label ? s.active : ''}
-                  onClick={() => changeNumber(+label)}
+          <button
+              key={index}
+              className={page === label
+                  ? s.active
+                  : ''
+              }
+              onClick={() => changeNumber(+label)}
           >
             {label}
           </button>
         ))}
-        <button disabled={page >= totalPages}
-                onClick={() => changeNumber(page + 1)}>
+        <button
+            disabled={page >= totalPages}
+            onClick={() => changeNumber(page + 1)}
+        >
           {'>'}
         </button>
       </div>

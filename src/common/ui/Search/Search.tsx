@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC } from 'react';
 import s from './Search.module.scss';
-import { InputText } from '../ui/InputText';
+import {InputText} from "src/common/ui/InputText";
 
 type PropsType = {
   loading: boolean
@@ -14,12 +14,13 @@ export const Search: FC<PropsType> = ({
 
   return (
     <div>
-      <InputText className={s.search}
-             type='text'
-             name='search'
-             onChange={handleSearch}
-             disabled={loading}
-             placeholder={'Search pack'}
+      <InputText
+          className={s.search}
+          type='text'
+          name='search'
+          onChange={handleSearch}
+          disabled={loading}
+          placeholder={'Search pack'}
       />
       {children}
     </div>

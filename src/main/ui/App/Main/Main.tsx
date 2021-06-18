@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { Routes } from 'src/main/ui/App/Routes';
 
 import s from './Main.module.scss';
-import { Routes } from '../Routes';
 
 export const Main: FC = () => {
 

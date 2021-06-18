@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import s from './LoginPage.module.scss';
-import { LoginFormContainer } from './LoginFormContainer/LoginFormContainer';
+import { LoginFormContainer } from 'src/pages/login/ui/LoginFormContainer';
 
 export const LoginPage: FC = () => {
   return (

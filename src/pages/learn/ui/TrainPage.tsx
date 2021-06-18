@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { Train } from './Train/Train';
 
 import s from './TrainPage.module.scss';
-import { Train } from './Train/Train';
 
 export const TrainPage: FC = () => {
   return (

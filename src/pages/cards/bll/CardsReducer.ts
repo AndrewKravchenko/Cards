@@ -1,5 +1,9 @@
-import { ThunkType } from '../../../main/bll/store';
-import { cardsApi, CardsResponseDataType, CardsType } from '../dal/CardsApi';
+import { ThunkType } from 'src/main/bll/store';
+import {
+  cardsApi,
+  CardsResponseDataType,
+  CardsType
+} from 'src/pages/cards/dal/CardsApi';
 
 export enum cardsActionType {
   SET_LOADING_CARDS = 'CARDS/CARDS/SET_LOADING',
@@ -168,6 +172,7 @@ export type StateType = {
   error: string;
 };
 
-export type ActionsCardsType = ReturnType<typeof setLoadingCards>
+export type ActionsCardsType =
+    ReturnType<typeof setLoadingCards>
   | ReturnType<typeof setCards>
   | ReturnType<typeof setErrorCards>

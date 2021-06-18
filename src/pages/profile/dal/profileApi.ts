@@ -1,5 +1,5 @@
-import { API, FileAPI } from '../../../main/dal/api';
-import { ResponseUserDataType } from '../../login/dal/loginApi';
+import { API, FileAPI } from 'src/main/dal/api';
+import { ResponseUserDataType } from 'src/pages/login/dal/loginApi';
 
 export const logOutAPI = {
   logOut() {

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import s from './Packs.module.scss';
-import { PacksContainer } from './Packs/PacksContainer';
+import { PacksContainer } from 'src/pages/packs/ui/Packs/PacksContainer';
 
 export const PacksPage: FC = () => {
   return (

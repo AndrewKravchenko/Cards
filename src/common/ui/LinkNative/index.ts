@@ -1,1 +1,1 @@
-export * from './LinkNative';
+export {LinkNative} from './LinkNative';

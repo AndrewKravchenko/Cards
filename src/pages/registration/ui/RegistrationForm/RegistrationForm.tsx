@@ -1,15 +1,12 @@
 import React, { FC, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-
 import s from './RegistrationForm.module.scss';
-import { InputText } from '../../../../common/ui/InputText';
-import { Button } from '../../../../common/ui/Button';
-import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
-import {
-  HookInputType,
-  useInput,
-} from '../../../../hooks/ValidationFormAndrew';
-import { ErrorMessage } from '../../../../common/ui/ErrorMessage';
+import { Button } from 'src/common/ui/Button';
+import { HookInputType } from 'src/hooks/types';
+import { InputText } from 'src/common/ui/InputText';
+import { useInput } from 'src/hooks/ValidationFormAndrew';
+import { ErrorMessage } from 'src/common/ui/ErrorMessage';
+import { LoginLinkType } from 'src/pages/login/ui/LoginFormContainer';
 
 type PropsType = {
   loginLink: LoginLinkType;
@@ -46,7 +43,6 @@ export const RegistrationForm: FC<PropsType> = ({
       }
     }
   };
-
   const closeMessageHandler = (obj?: HookInputType) => () => {
     closeMessage('');
     if (obj) {
@@ -66,46 +62,48 @@ export const RegistrationForm: FC<PropsType> = ({
               {email.inputError}
             </ErrorMessage>
           )}
-
-          <InputText placeholder={'Email'}
-                     type={'email'}
-                     onChange={email.onChange}
-                     onBlur={email.onBlur}
-                     value={email.value}
-                     disabled={loading}
+          <InputText
+              placeholder={'Email'}
+              type={'email'}
+              onChange={email.onChange}
+              onBlur={email.onBlur}
+              value={email.value}
+              disabled={loading}
           />
-
           {password.isDirty && password.inputError && (
             <ErrorMessage clickHandler={closeMessageHandler(password)}>
               {password.inputError}
             </ErrorMessage>
           )}
-          <InputText placeholder={'Password'}
-                     type={'password'}
-                     onChange={password.onChange}
-                     onBlur={password.onBlur}
-                     value={password.value}
-                     disabled={loading}
+          <InputText
+              placeholder={'Password'}
+              type={'password'}
+              onChange={password.onChange}
+              onBlur={password.onBlur}
+              value={password.value}
+              disabled={loading}
           />
           {repeatPassword.isDirty && repeatPassword.inputError && (
             <ErrorMessage clickHandler={closeMessageHandler(repeatPassword)}>
               {repeatPassword.inputError}
             </ErrorMessage>
           )}
-          <InputText placeholder={'Repeat password'}
-                     type={'password'}
-                     onChange={repeatPassword.onChange}
-                     onBlur={repeatPassword.onBlur}
-                     value={repeatPassword.value}
-                     disabled={loading}
+          <InputText
+              placeholder={'Repeat password'}
+              type={'password'}
+              onChange={repeatPassword.onChange}
+              onBlur={repeatPassword.onBlur}
+              value={repeatPassword.value}
+              disabled={loading}
           />
-            <Button type="submit"
-                    disabled={disabledSubmitBtn}>
+            <Button
+                type="submit"
+                disabled={disabledSubmitBtn}
+            >
               Sing Up
             </Button>
-
             <Link to={link} className={s.link}>
-                {title}
+              {title}
             </Link>
         </form>
     );

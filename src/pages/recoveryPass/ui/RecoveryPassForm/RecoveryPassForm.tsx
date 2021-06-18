@@ -1,12 +1,11 @@
-import React, { FC, FormEvent, useEffect, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-
+import React, {FC, FormEvent, useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {Button} from 'src/common/ui/Button';
 import s from './RecoveryPassForm.module.scss';
-import { InputText } from '../../../../common/ui/InputText';
-import { Button } from '../../../../common/ui/Button';
-import { LoginLinkType } from '../../../login/ui/LoginFormContainer/LoginFormContainer';
-import { InfoErrorMessage } from '../../../../common/ui/InfoErrorMessage/InfoErrorMessage';
-import { recoveryPassActions } from '../../bll/recoveryPassActions';
+import {InputText} from 'src/common/ui/InputText';
+import {InfoErrorMessage} from 'src/common/ui/InfoErrorMessage';
+import {LoginLinkType} from 'src/pages/login/ui/LoginFormContainer';
+import {recoveryPassActions} from 'src/pages/recoveryPass/bll/recoveryPassActions';
 
 type PropsType = {
   loginLink: LoginLinkType;
@@ -16,7 +15,6 @@ type PropsType = {
   loading: boolean;
   success: boolean;
   error: string;
-  redirectLink: string;
 };
 
 export const RecoveryPassForm: FC<PropsType> = ({
@@ -26,15 +24,16 @@ export const RecoveryPassForm: FC<PropsType> = ({
   loading,
   success,
   error,
-  redirectLink,
 }) => {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    console.log('asdasd');
     if (success) {
       setEmail('');
       setSuccess(false);
+      setTimeout(()=> {
+        alert('Check your email')
+      }, 1000)
     }
   }, [success, setSuccess]);
 
@@ -46,10 +45,6 @@ export const RecoveryPassForm: FC<PropsType> = ({
     }
   };
 
-  if (success) {
-    return <Redirect to={redirectLink} />;
-  }
-
   return (
     <form className={s.form} onSubmit={submitHandler}>
       <InfoErrorMessage
@@ -57,7 +52,6 @@ export const RecoveryPassForm: FC<PropsType> = ({
         error={error}
         action={recoveryPassActions.setError('')}
       />
-
       <InputText
         type="email"
         placeholder="Email"
@@ -65,11 +59,9 @@ export const RecoveryPassForm: FC<PropsType> = ({
         value={email}
         disabled={loading}
       />
-
       <Button type="submit" disabled={loading}>
         Submit
       </Button>
-
       <Link to={link} className={s.link}>
         {title}
       </Link>

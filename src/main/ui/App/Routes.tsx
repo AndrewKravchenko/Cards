@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { LoginPage } from '../../../pages/login/ui/LoginPage';
-import { RecoveryPassPage } from '../../../pages/recoveryPass/ui/RecoveryPassPage';
-import { SetPassPage } from '../../../pages/setPass/ui/SetPassPage';
-import { Error404Page } from '../../../pages/error404/ui/Error404Page';
+import { LoginPage } from 'src/pages/login/ui/LoginPage';
 import { NotAuthWithRedirect } from './NotAuthWithRedirect';
-import { RegistrationPage } from '../../../pages';
+import { SetPassPage } from 'src/pages/setPass/ui/SetPassPage';
+import { Error404Page } from 'src/pages/error404/ui/Error404Page';
+import { RecoveryPassPage } from 'src/pages/recoveryPass/ui/RecoveryPassPage';
+import { RegistrationPage } from 'src/pages/registration/ui/RegistrationPage';
 
 export const PATH = {
   LOGIN: '/login',

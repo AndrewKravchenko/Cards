@@ -1,19 +1,17 @@
 import React, { FC, FormEvent, useState } from 'react';
-
-import s from './LoginForm.module.scss';
-import { InputText } from '../../../../common/ui/InputText';
 import { Link, Redirect } from 'react-router-dom';
-import { Button } from '../../../../common/ui/Button';
+import s from './LoginForm.module.scss';
+import { Button } from 'src/common/ui/Button';
+import { randomId } from 'src/utils/randomId';
+import { HookInputType } from 'src/hooks/types';
+import { InputText } from 'src/common/ui/InputText';
 import { LoginLinkType } from './LoginFormContainer';
-import { InputCheckbox } from '../../../../common/ui/InputCheckbox';
-import { randomId } from '../../../../utils/randomId';
-import {
-  HookInputType,
-  useInput,
-} from '../../../../hooks/ValidationFormAndrew';
-import { ErrorMessage } from '../../../../common/ui/ErrorMessage';
-import { InfoErrorMessage } from '../../../../common/ui/InfoErrorMessage/InfoErrorMessage';
-import { setErrorLogin } from '../../bll/authReducer';
+import { useInput } from 'src/hooks/ValidationFormAndrew';
+import { ErrorMessage } from 'src/common/ui/ErrorMessage';
+import { InputCheckbox } from 'src/common/ui/InputCheckbox';
+import { setErrorLogin } from 'src/pages/login/bll/authReducer';
+import { InfoErrorMessage } from 'src/common/ui/InfoErrorMessage';
+
 
 type PropsType = {
   loginLinks: LoginLinkType[];
@@ -60,8 +58,8 @@ export const LoginForm: FC<PropsType> = ({
   };
 
   const disabledSubmitBtn = !email.inputValid
-                            || !password.inputValid
-                            || loading;
+      || !password.inputValid
+      || loading;
 
   return <form className={s.form} onSubmit={submitHandler}>
     <InfoErrorMessage
@@ -74,41 +72,47 @@ export const LoginForm: FC<PropsType> = ({
         {email.inputError}
       </ErrorMessage>
     )}
-
-    <InputText placeholder={'Login'}
-               type={'email'}
-               onChange={e => email.onChange(e)}
-               onBlur={email.onBlur}
-               value={email.value}
-               disabled={loading}
+    <InputText
+        placeholder={'Login'}
+        type={'email'}
+        onChange={e => email.onChange(e)}
+        onBlur={email.onBlur}
+        value={email.value}
+        disabled={loading}
     />
-
     {password.isDirty && password.inputError && (
       <ErrorMessage clickHandler={closeMessageHandler(password)}>
         {password.inputError}
       </ErrorMessage>
     )}
-    <InputText placeholder={'Password'}
-               type={'password'}
-               onChange={e => password.onChange(e)}
-               onBlur={password.onBlur}
-               value={password.value}
-               disabled={loading}
+    <InputText
+        placeholder={'Password'}
+        type={'password'}
+        onChange={e => password.onChange(e)}
+        onBlur={password.onBlur}
+        value={password.value}
+        disabled={loading}
     />
-    <InputCheckbox type={'checkbox'}
-                   checked={rememberMe}
-                   onChangeChecked={setRememberMe}
-    > Remember me
+    <InputCheckbox
+        type={'checkbox'}
+        checked={rememberMe}
+        onChangeChecked={setRememberMe}
+    >
+      Remember me
     </InputCheckbox>
-
-    <Button type='submit'
-            disabled={disabledSubmitBtn}>
+    <Button
+        type='submit'
+        disabled={disabledSubmitBtn}
+    >
       Submit
     </Button>
-
     <div className={s.linksForm}>
       {loginLinks.map(({ link, title }) => (
-        <Link key={randomId()} to={link} className={s.link}>
+        <Link
+            key={randomId()}
+            to={link}
+            className={s.link}
+        >
           {title}
         </Link>
       ))}

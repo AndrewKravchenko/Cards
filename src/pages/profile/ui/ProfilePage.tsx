@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-
 import s from './ProfilePage.module.scss';
-import { ProfileFormContainer } from './ProfileFormContainer/ProfileFormContainer';
+import { ProfileFormContainer } from 'src/pages/profile/ui/ProfileFormContainer';
 
 export const ProfilePage: FC = () => {
   return (

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { DEV } from '../../config';
+import { DEV } from 'src/config';
 
 export const baseURL = DEV
   ? 'http://localhost:7542/2.0/'

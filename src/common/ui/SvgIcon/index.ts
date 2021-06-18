@@ -1,1 +1,1 @@
-export * from './SvgIcon';
+export {SvgIcon} from './SvgIcon';

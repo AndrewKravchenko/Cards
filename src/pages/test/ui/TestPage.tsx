@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import s from './TestPage.module.scss';
-import { TestContainer } from './TestContainer';
+import { TestContainer } from 'src/pages/test/ui/TestContainer';
 
 export const TestPage: FC = () => {
   return (

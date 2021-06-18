@@ -1,8 +1,10 @@
-import { API } from '../../../main/dal/api';
+import { API } from 'src/main/dal/api';
 
 export const setNewPassAPI = {
   setNewPass({ password, resetPasswordToken }: RequestNewPassDataType) {
-    return API.post(`auth/set-new-password`, { password, resetPasswordToken })
+    return API.post(
+      `auth/set-new-password`, { password, resetPasswordToken }
+    )
       .then(response => response.data);
   },
 };

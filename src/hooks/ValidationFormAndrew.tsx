@@ -45,7 +45,7 @@ const useValidation = (value: string, validations: ValidationsType) => {
           }
       }
     }
-  }, [value, validations]);
+  }, [value, validations, inputError]);
 
   useEffect(() => {
     if (inputError) {
@@ -61,7 +61,7 @@ const useValidation = (value: string, validations: ValidationsType) => {
     inputValid,
   };
 };
-export type HookInputType = ReturnType<typeof useInput>
+
 export const useInput = (initialValue: string, validations: ValidationsType) => {
   const [value, setValue] = useState(initialValue);
   const [isDirty, setDirty] = useState(false); //выход из инпута
@@ -70,7 +70,6 @@ export const useInput = (initialValue: string, validations: ValidationsType) => 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
-
   const onBlur = () => {
     setDirty(true);
   };

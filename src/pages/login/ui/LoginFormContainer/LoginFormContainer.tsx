@@ -1,19 +1,18 @@
 import React, { FC } from 'react';
 import { LoginForm } from './LoginForm';
-import { PATH } from '../../../../main/ui/App/Routes';
+import { PATH } from 'src/main/ui/App/Routes';
 import {
   capitalizeFirstLetter,
   transformLinkToTitle,
-} from '../../../../utils/textTransform';
+} from 'src/utils/textTransform';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginPageTC, setErrorLogin } from '../../bll/authReducer';
-import { selectLogin } from '../../bll/selectLogin';
+import { selectLogin } from 'src/pages/login/bll/selectLogin';
+import { loginPageTC, setErrorLogin } from 'src/pages/login/bll/authReducer';
 
 export const LoginFormContainer: FC = () => {
   const dispatch = useDispatch();
 
   const { RECOVERY_PASS, REGISTRATION, PROFILE } = PATH;
-
   const loginLinks: LoginLinkType[] = [
     {
       link: RECOVERY_PASS,
@@ -30,6 +29,7 @@ export const LoginFormContainer: FC = () => {
     user
   } = useSelector(selectLogin)
   const userId = user._id;
+
   const sendLogin = (email: string, password: string, rememberMe: boolean) => {
     dispatch(loginPageTC(email, password, rememberMe));
   };
@@ -37,14 +37,17 @@ export const LoginFormContainer: FC = () => {
     dispatch(setErrorLogin(error));
   };
 
-  return <LoginForm loginLinks={loginLinks}
-                    sendLogin={sendLogin}
-                    loading={loading}
-                    userId={userId}
-                    error={error}
-                    closeMessage={closeMessage}
-                    redirectLink={PROFILE}
-  />;
+  return (
+      <LoginForm
+          loginLinks={loginLinks}
+          sendLogin={sendLogin}
+          loading={loading}
+          userId={userId}
+          error={error}
+          closeMessage={closeMessage}
+          redirectLink={PROFILE}
+      />
+  );
 };
 
 export type LoginLinkType = {

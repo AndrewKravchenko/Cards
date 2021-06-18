@@ -8,11 +8,11 @@ import {
 } from 'redux';
 import thunk, { ThunkAction, ThunkMiddleware } from 'redux-thunk';
 
-import { DEV } from '../../config';
-import { authReducer as login } from '../../pages/login/bll/authReducer';
-import { recoveryPassReducer as recoveryPass } from '../../pages/recoveryPass/bll/recoveryPassReducer';
-import { packsReducer as packs } from '../../pages/packs/bll/PacksReducer';
-import { cardsReducer as cards } from '../../pages/cards/bll/CardsReducer';
+import { DEV } from 'src/config';
+import { authReducer as login } from 'src/pages/login/bll/authReducer';
+import { recoveryPassReducer as recoveryPass } from 'src/pages/recoveryPass/bll/recoveryPassReducer';
+import { packsReducer as packs } from 'src/pages/packs/bll/PacksReducer';
+import { cardsReducer as cards } from 'src/pages/cards/bll/CardsReducer';
 
 const rootReducer = combineReducers({
   login,

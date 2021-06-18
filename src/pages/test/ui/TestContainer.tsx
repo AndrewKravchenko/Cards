@@ -1,15 +1,14 @@
 import React, { FC, ElementType } from 'react';
-
-import { unCamelCase } from '../../../utils/textTransform';
 import { Test } from './Test';
-import { Preloader } from '../../../common/ui/Preloader';
-import { ErrorMessage } from '../../../common/ui/ErrorMessage';
-import { LinkNative } from '../../../common/ui/LinkNative';
-import { Button } from '../../../common/ui/Button';
-import { InputText } from '../../../common/ui/InputText';
-import { InputCheckbox } from '../../../common/ui/InputCheckbox';
-import { InputRadio } from '../../../common/ui/InputRadio';
-import { Select } from '../../../common/ui/Select';
+import { Button } from 'src/common/ui/Button';
+import { Select } from 'src/common/ui/Select';
+import { Preloader } from 'src/common/ui/Preloader';
+import { InputText } from 'src/common/ui/InputText';
+import { unCamelCase } from 'src/utils/textTransform';
+import { LinkNative } from 'src/common/ui/LinkNative';
+import { InputRadio } from 'src/common/ui/InputRadio';
+import { ErrorMessage } from 'src/common/ui/ErrorMessage';
+import { InputCheckbox } from 'src/common/ui/InputCheckbox';
 
 const exampleLibrary: ExampleLibraryType = {
   preloader: [Preloader, { text: 'Loading' }],
@@ -39,9 +38,9 @@ const exampleLibrary: ExampleLibraryType = {
   ],
 };
 
-const examples: ExamplesType = Object.entries(
-  exampleLibrary,
-).map(([title, example]) => [unCamelCase(title), example]);
+const examples: ExamplesType = Object.entries( exampleLibrary)
+    .map(([title, example]) =>
+        [unCamelCase(title), example]);
 
 export const TestContainer: FC = () => {
   return <Test examples={examples} />;

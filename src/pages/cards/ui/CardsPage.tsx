@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import s from './Cards.module.scss';
-import { CardsContainer } from './CardsContainer/CardsContainer';
+import { CardsContainer } from "./CardsContainer";
 
 export const CardsPage: FC = () => {
   return (
